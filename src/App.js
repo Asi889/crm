@@ -1,26 +1,26 @@
 import React from 'react';
+import NavBar from './components/NavBar';
+import Clients from './components/Clients';
+import  Actions from './components/Actions';
+import  Analytics from './components/Analytics';
 import logo from './logo.svg';
 import './App.css';
+import { inject, observer } from 'mobx-react';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
-function App() {
+const App= inject('clientData', 'list')( observer(()=>{
   return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <NavBar />
+      <Route path='/clients' exact render={() => <Clients/>}/>
+      <Route path='/actions' exact render={() => <Actions/>}/>
+      <Route path='/anaytics' exact render={() => <Analytics/>}/>
+      
     </div>
+    </Router>
   );
-}
+}))
 
 export default App;
